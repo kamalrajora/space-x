@@ -1,0 +1,53 @@
+.content {
+  position: absolute;
+  top: 65px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow-y: scroll;
+}
+
+.content-mob {
+  position: absolute;
+  top: 113px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow-y: scroll;
+}
+
+.example-card {
+  max-width: 320px;
+  margin: 5px 5px 5px 5px;
+}
+
+mat-drawer {
+  position: fixed;
+  background-color: rgb(236, 236, 236);
+}
+
+.year-btn-margin {
+  margin: 5px 10px 5px 10px;
+}
+.default-year-btn {
+  background-color: #97cba8;
+}
+.selected-year-btn {
+  background-color: #47aa68;
+}
+.filter-header {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px;
+}
+.center-align-content {
+  display: block;
+  position: fixed;
+  width: 250px;
+  z-index: 1031;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+}

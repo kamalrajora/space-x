@@ -1,0 +1,106 @@
+<article (scroll)="onScroll($event)">
+  <mat-toolbar>
+    <button
+      *ngIf="deviceXs"
+      type="button"
+      mat-icon-button
+      (click)="drawer.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    SpaceX Launch Programs
+  </mat-toolbar>
+
+  <mat-drawer-container class="example-container">
+    <mat-drawer
+      #drawer
+      [mode]="deviceXs ? 'over' : 'side'"
+      [opened]="deviceXs ? false : true"
+      position="start"
+      fxFlex="20"
+      fxLayout="column"
+      fxLayoutAlign="start space-between"
+      [style.marginTop.px]="10"
+      [style.top.px]="sideBarScroll()"
+    >
+      <div id="yearFilterSection">
+        <div class="filter-header">Filters</div>
+        <div align="center">Launch Years</div>
+
+        <ng-container *ngFor="let item of [].constructor(16); let i = index">
+          <button
+            class="year-btn-margin"
+            mat-button
+            [class]="yearBtnClass(i)"
+            (click)="selectYear(i)"
+          >
+            {{ 2006 + i }}
+          </button>
+          <br *ngIf="i % 2 !== 0" />
+        </ng-container>
+      </div>
+      <div id="successfulLaunch">
+        <div align="center">successfulLaunch</div>
+
+        <button
+          class="year-btn-margin"
+          mat-button
+          [ngClass]="{
+            'selected-year-btn': isLaunchSuccess,
+            'default-year-btn': !isLaunchSuccess
+          }"
+          (click)="successfulLaunchClicked(true)"
+        >
+          True
+        </button>
+        <button
+          class="year-btn-margin"
+          mat-button
+          [ngClass]="{
+            'selected-year-btn': !isLaunchSuccess,
+            'default-year-btn': isLaunchSuccess
+          }"
+          (click)="successfulLaunchClicked(false)"
+        >
+          False
+        </button>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <mat-spinner class="center-align-content" *ngIf="isSpinner"></mat-spinner>
+      <div class="center-align-content" *ngIf="data.length == 0 && !isSpinner">
+        {{ noDataAvailable }}
+      </div>
+      <div
+        class="example-sidenav-content"
+        fxLayout="row wrap"
+        fxLayout.xs="column"
+        fxLayoutAlign="space-evenly center"
+      >
+        <mat-card
+          class="example-card"
+          *ngFor="let item of data"
+          style="max-height: 380px;"
+        >
+          <img
+            mat-card-image
+            [src]="item.links.mission_patch_small"
+            alt="SpaceX img"
+          />
+          <mat-card-content>
+            <div>{{ item.mission_name }}#</div>
+          </mat-card-content>
+          <mat-card-content>
+            <div>Mission IDs: {{ item.mission_id }}</div>
+          </mat-card-content>
+          <mat-card-content>
+            <div>Launch Year: {{ item.launch_year }}</div>
+          </mat-card-content>
+          <mat-card-content>
+            <div>Successful Launch: {{ item.launch_success }}</div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</article>
